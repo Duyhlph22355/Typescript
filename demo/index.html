@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="main.js"></script>
+    <link href="/dist/output.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mx-auto mt-10">
+        <div class="grid grid-cols-3 gap-4">
+          <button id="0" class="btn btn-gray-300 p-4"></button>
+          <button id="1" class="btn btn-gray-300 p-4"></button>
+          <button id="2" class="btn btn-gray-300 p-4"></button>
+          <button id="3" class="btn btn-gray-300 p-4"></button>
+          <button id="4" class="btn btn-gray-300 p-4"></button>
+          <button id="5" class="btn btn-gray-300 p-4"></button>
+          <button id="6" class="btn btn-gray-300 p-4"></button>
+          <button id="7" class="btn btn-gray-300 p-4"></button>
+          <button id="8" class="btn btn-gray-300 p-4"></button>
+        </div>
+        <div class="mt-4" id="status"></div>
+        <button class="btn btn-blue-500 mt-4" id="reset">Reset</button>
+      </div>
+      <script>
+        const board = ['', '', '', '', '', '', '', '', ''];
+        let currentPlayer = 'X';
+        let gameOver = false;
+        
+        const resetBtn = document.querySelector('#reset');
+        const statusDiv = document.querySelector('#status');
+        const buttons = document.querySelectorAll('.btn');
+      
+        function checkWin() {
+          if (
+            (board[0] === currentPlayer && board[1] === currentPlayer && board[2] === currentPlayer) ||
+            (board[3] === currentPlayer && board[4] === currentPlayer && board[5] === currentPlayer) ||
+            (board[6] === currentPlayer && board[7] === currentPlayer && board[8] === currentPlayer) ||
+            (board[0] === currentPlayer && board[3] === currentPlayer && board[6] === currentPlayer) ||
+            (board[1] === currentPlayer && board[4] === currentPlayer && board[7] === currentPlayer) ||
+            (board[2] === currentPlayer && board[5] === currentPlayer && board[8] === currentPlayer) ||
+            (board[0] === currentPlayer && board[4] === currentPlayer && board[8] === currentPlayer) ||
+            (board[2] === currentPlayer && board[4] === currentPlayer && board[6] === currentPlayer)
+          ) {
+            statusDiv.innerHTML = `${currentPlayer} wins!`;
+            gameOver = true;
+          } else if (board.every(cell => cell !== '')) {
+            statusDiv}
+          }
+        
+    </script>
+      
+</body>
+</html>

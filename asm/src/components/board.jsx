@@ -49,7 +49,7 @@ const Board = ({ children }) => {
         <Square value={game[8]} position={8} handlePlay={handlePlay}/>
     </div>
     <button
-        className="p-2 mt-3 border-[2px] rounded-2xl text-black bg-[#14bdac] hover:bg-green-500 focus:bg-green-500"
+        className="p-2 mt-3 border-[2px] text-black bg-[#14bdac] hover:bg-green-500 focus:bg-green-500"
         onClick={Reset}
       >
         Reset game

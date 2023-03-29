@@ -18,22 +18,22 @@ const Board = ({ children }) => {
 
     const listWinner = [
         [0,1,2], [0,4,8], [2,4,6], [0,3,6], [1,4,7], [2,5,8], [3,4,5], [6,7,8]
-    ]
-
-    const Reset = () => {
-        setGame([null, null, null, null, null, null, null, null, null]);
-        setPlayer(true);
-      };
+    ];
 
     const checkWinner = () => {
         for(let i = 0; i < listWinner.length; i++) {
-            const [p1, p2, p3] = listWinner[i]
+            const [p1, p2, p3] = listWinner[i];
             if(game[p1] === game[p2] && game[p2] === game[p3]) {
                 return game[p1]
             }
         }
         return null
     }
+
+    const Reset = () => {
+        setGame([null, null, null, null, null, null, null, null, null]);
+        setPlayer(true);
+    };
 
     return <>
     <h2>Winner is: {checkWinner()}</h2>

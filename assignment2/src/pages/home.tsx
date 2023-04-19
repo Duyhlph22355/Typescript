@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { getAll } from "../api/product"
 import { IProduct } from "../models"
-import Product from "../components/layout/user/product"
+import Product from "../components/user/product"
 
 const Home = () => {
     const [products, setProducts] = useState<IProduct[]>([])

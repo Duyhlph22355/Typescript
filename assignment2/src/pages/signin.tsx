@@ -1,7 +1,40 @@
-import Footer from "../components/layout/user/footer"
-import Header from "../components/layout/user/header"
+import Footer from "../components/user/footer"
+import Header from "../components/user/header"
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { SigninForm, signinSchema } from "../models"
+import { signin } from "../api/auth"
+import { Navigate, useNavigate } from "react-router-dom"
+import { useLocalStorage } from "../hooks"
 
 const Signin = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm<SigninForm>({
+        resolver: yupResolver(signinSchema)
+    })
+
+    const navigate = useNavigate()
+    const [user, setUser] = useLocalStorage("user", null)
+
+    const onSubmit = async (data: SigninForm) => {
+        try {
+            const { data: { accessToken, user} } = await signin(data)
+            setUser({
+                accessToken,
+                ...user
+            })
+            if (Number(user.role) == 1) {
+                navigate('/admin')
+                alert("Đăng nhập thành công");
+            } else {
+                navigate('/')
+                alert("Đăng nhập thành công");
+            }
+
+        } catch (err) {
+            console.log(err);
+        }
+        
+    }
     return <>
         <Header></Header>
         <section className="bg-white">
@@ -78,18 +111,21 @@ const Signin = () => {
                             </p>
                         </div>
 
-                        <form action="#" className="mt-8 grid grid-cols-2 gap-6">
+                        <form action="#" className="mt-8 grid grid-cols-2 gap-9" onSubmit={handleSubmit(onSubmit)}>
+
                             <div className="col-span-6 w-[410px] h-[48px]">
                                 <label htmlFor="Email" className="block text-sm font-medium text-gray-700">
                                     Email
                                 </label>
 
                                 <input
-                                    type="email"
-                                    id="Email"
-                                    name="email"
+                                    type="text"
+                                    {...register('email')}
                                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                                 />
+                                <p className="text-red-500 text-[15px]">
+                                    {errors.email && errors.email.message}
+                                </p>
                             </div>
                             <div className="col-span-6 w-[410px] h-[48px]">
                                 <label htmlFor="Email" className="block text-sm font-medium text-gray-700">
@@ -98,15 +134,13 @@ const Signin = () => {
 
                                 <input
                                     type="password"
-                                    id="pass"
-                                    name="pass"
+                                    {...register('password')}
                                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                                 />
+                                <p className="text-red-500 text-[15px]">
+                                    {errors.password && errors.password.message}
+                                </p>
                             </div>
-
-
-
-
                             <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
                                 <button
                                     className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"

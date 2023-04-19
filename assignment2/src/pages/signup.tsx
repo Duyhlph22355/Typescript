@@ -1,7 +1,32 @@
-import Footer from "../components/layout/user/footer"
-import Header from "../components/layout/user/header"
+import Footer from "../components/user/footer"
+import Header from "../components/user/header"
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as Yup from 'yup'
+import { SignupForm, signupSchema } from "../models"
+import { signup } from "../api/auth"
+import { useNavigate } from "react-router-dom"
+
 
 const Signup = () => {
+    const { register, handleSubmit, formState: { errors } } = useForm<SignupForm>({
+        resolver: yupResolver(signupSchema)
+    })
+
+    const navigate = useNavigate()
+
+    const onSubmit = async (data: SignupForm) => {
+        try {
+            delete data.confirmPassword;
+            const response = await signup(data)
+            console.log(response);
+            navigate('/signin')
+
+        } catch (err) {
+            console.log(err);
+
+        }
+    }
     return <>
         <Header></Header>
         <section className="bg-white">
@@ -78,30 +103,48 @@ const Signup = () => {
                             </p>
                         </div>
 
-                        <form action="#" className="mt-8 grid grid-cols-2 gap-6">
+                        <form action="#" className="mt-8 grid grid-cols-2 gap-9" onSubmit={handleSubmit(onSubmit)}>
+                            <div className="col-span-6 w-[410px] h-[48px]">
+                                <label htmlFor="Email" className="block text-sm font-medium text-gray-700">
+                                    Họ
+                                </label>
+
+                                <input
+                                    type="text"
+                                    {...register('firstName')}
+                                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                                />
+                                <p className="text-red-500 text-[15px]">
+                                    {errors.firstName && errors.firstName.message}
+                                </p>
+                            </div>
+                            <div className="col-span-6 w-[410px] h-[48px]">
+                                <label htmlFor="Email" className="block text-sm font-medium text-gray-700">
+                                    Tên
+                                </label>
+
+                                <input
+                                    type="text"
+                                    {...register('lastName')}
+                                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                                />
+                                <p className="text-red-500 text-[15px]">
+                                    {errors.lastName && errors.lastName.message}
+                                </p>
+                            </div>
                             <div className="col-span-6 w-[410px] h-[48px]">
                                 <label htmlFor="Email" className="block text-sm font-medium text-gray-700">
                                     Email
                                 </label>
 
                                 <input
-                                    type="email"
-                                    id="Email"
-                                    name="email"
-                                    className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-                                />
-                            </div>
-                            <div className="col-span-6 w-[410px] h-[48px]">
-                                <label htmlFor="Email" className="block text-sm font-medium text-gray-700">
-                                    Số Điện Thoại
-                                </label>
-
-                                <input
                                     type="text"
-                                    id="phoneNumber"
-                                    name="phoneNumber"
+                                    {...register('email')}
                                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                                 />
+                                <p className="text-red-500 text-[15px]">
+                                    {errors.email && errors.email.message}
+                                </p>
                             </div>
                             <div className="col-span-6 w-[410px] h-[48px]">
                                 <label htmlFor="Email" className="block text-sm font-medium text-gray-700">
@@ -110,10 +153,12 @@ const Signup = () => {
 
                                 <input
                                     type="password"
-                                    id="pass"
-                                    name="pass"
+                                    {...register('password')}
                                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                                 />
+                                <p className="text-red-500 text-[15px]">
+                                    {errors.password && errors.password.message}
+                                </p>
                             </div>
                             <div className="col-span-6 w-[410px] h-[48px]">
                                 <label htmlFor="Email" className="block text-sm font-medium text-gray-700">
@@ -122,10 +167,12 @@ const Signup = () => {
 
                                 <input
                                     type="password"
-                                    id="rePass"
-                                    name="rePass"
+                                    {...register('confirmPassword')}
                                     className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                                 />
+                                <p className="text-red-500 text-[15px]">
+                                    {errors.confirmPassword && errors.confirmPassword.message}
+                                </p>
                             </div>
 
 

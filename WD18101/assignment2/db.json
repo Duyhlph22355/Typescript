@@ -1,0 +1,99 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Product 1 update 23",
+      "price": "100000",
+      "image": "https://picsum.photos/200/100 ",
+      "desc": "Description 1",
+      "categoryId": 1
+    },
+    {
+      "id": 2,
+      "name": "Product 2",
+      "price": 200,
+      "image": "https://picsum.photos/200/100 ",
+      "desc": "Description 2",
+      "categoryId": 2
+    },
+    {
+      "id": 3,
+      "name": "Product 3",
+      "price": 300,
+      "image": "https://picsum.photos/200/100 ",
+      "desc": "Description 3",
+      "categoryId": 1
+    },
+    {
+      "name": "lê minh choke1111111111",
+      "price": "200000",
+      "image": "gửgsdfdvsd",
+      "desc": "123",
+      "categoryId": "3",
+      "id": 4
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Danh muc 1"
+    },
+    {
+      "id": 2,
+      "name": "Danh muc 2"
+    },
+    {
+      "name": "hoàng long duy",
+      "id": 3
+    },
+    {
+      "name": "Nguyen Van A",
+      "id": 4
+    },
+    {
+      "name": "lê minh choke",
+      "id": 5
+    },
+    {
+      "name": "ádfsdfsd",
+      "id": 6
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "longduy",
+      "password": "123456",
+      "roleId": 1
+    },
+    {
+      "id": 2,
+      "name": "quanli",
+      "password": "123456",
+      "roleId": 2
+    },
+    {
+      "name": "ưeqwe",
+      "password": "123123",
+      "roleId": "1",
+      "id": 3,
+      "role": "1"
+    },
+    {
+      "name": "longduy",
+      "password": "123123",
+      "roleId": "1",
+      "id": 4
+    }
+  ],
+  "roles": [
+    {
+      "id": 1,
+      "name": "admin"
+    },
+    {
+      "id": 2,
+      "name": "user"
+    }
+  ]
+}
